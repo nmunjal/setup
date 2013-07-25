@@ -33,7 +33,7 @@ fi
 let "steps++"
 
 # Install required common software
-software="git screen vim vim-common rsync gcc mlocate unzip rlwrap"
+software="git screen vim vim-common rsync gcc mlocate unzip rlwrap make"
 echo "$steps. Installing $software"
 if [ $system_type -eq $redhat_type ]; then
     sudo yum -y install $software
