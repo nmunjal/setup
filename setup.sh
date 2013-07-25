@@ -33,7 +33,7 @@ fi
 let "steps++"
 
 # Install required common software
-software="git screen vim vim-common rsync gcc mlocate unzip rlwrap make"
+software="git screen vim vim-common rsync gcc mlocate unzip rlwrap make curl"
 echo "$steps. Installing $software"
 if [ $system_type -eq $redhat_type ]; then
     sudo yum -y install $software
@@ -50,12 +50,12 @@ let "steps++"
 
 
 # Install specific software
-echo "$steps. Installing fcgi and nginx"
+echo "$steps. Installing fcgi and nginx and g++"
 if [ $system_type -eq $redhat_type ]; then
     sudo yum -y install http://epel.mirror.net.in/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    sudo yum -y install spawn-fcgi fcgi fcgi-devel
+    sudo yum -y install spawn-fcgi fcgi fcgi-devel gcc-c++
 elif [ $system_type -eq $debian_type ]; then
-    sudo apt-get -y install libfcgi-dev spawn-fcgi nginx curl
+    sudo apt-get -y install libfcgi-dev spawn-fcgi nginx g++
 fi
 let "steps++"
 
