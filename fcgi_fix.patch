@@ -1,0 +1,10 @@
+--- fcgio.cpp	2003-06-22 00:51:27.000000000 +0000
++++ fcgio_new.cpp	2013-08-06 07:08:15.453296503 +0000
+@@ -23,6 +23,7 @@
+ #endif
+ 
+ #include <limits.h>
++#include <cstdio>
+ #include "fcgio.h"
+ 
+ using std::streambuf;

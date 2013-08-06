@@ -6,12 +6,16 @@ redhat_type=2
 system_type=$unknown_type
 steps=1
 
+
 # Determine type of system - yum based or apt-get based
 if type apt-get > /dev/null; then
     echo "$steps. Debian type system detected"
+    sudo apt-get update
+    sudo apt-get upgrade
     system_type=$debian_type
 elif type yum > /dev/null; then
     echo "$steps. Redhat type system detected"
+    sudo yum update
     system_type=$redhat_type
 else
     echo "$steps. Unknown system - no apt-get, yum found"
@@ -32,8 +36,9 @@ elif [ $system_type -eq $debian_type ]; then
 fi
 let "steps++"
 
+
 # Install required common software
-software="git screen vim vim-common rsync gcc mlocate unzip rlwrap make curl"
+software="git screen vim vim-common rsync gcc mlocate unzip rlwrap make curl patch"
 echo "$steps. Installing $software"
 if [ $system_type -eq $redhat_type ]; then
     sudo yum -y install $software
@@ -49,13 +54,14 @@ sudo updatedb
 let "steps++"
 
 
+
 # Install specific software
-echo "$steps. Installing fcgi and nginx and g++"
+echo "$steps. Installing g++"
 if [ $system_type -eq $redhat_type ]; then
     sudo yum -y install http://epel.mirror.net.in/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    sudo yum -y install spawn-fcgi fcgi fcgi-devel gcc-c++
+    sudo yum -y install gcc-c++ python-pip
 elif [ $system_type -eq $debian_type ]; then
-    sudo apt-get -y install libfcgi-dev spawn-fcgi nginx g++
+    sudo apt-get -y install g++ pip
 fi
 let "steps++"
 
@@ -67,10 +73,15 @@ if [ -d ./dotfiles/ ]; then
     mv -f dotfiles dotfiles.old
 fi
 git clone https://github.com/nmunjal/dotfiles
+cd dotfiles
+git pull
+cd -
 ln -sb dotfiles/.screenrc .
 ln -sb dotfiles/.bash_profile .
 ln -sb dotfiles/.bashrc .
 ln -sb dotfiles/.bashrc_custom .
+ln -sb dotfiles/.vimrc .
+ln -sb dotfiles/.gitconfig .
 let "steps++"
 
 
