@@ -39,7 +39,7 @@ type python-pip > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     pip="python-pip"
 fi
-# Bug https://github.com/locustio/locust/issues/52
+# Bug https://github.com/locustio/locust/issues/49
 # Need to install latest gevent 1.0rc2
 sudo $pip install cython # dependency for gevent1.0 rc
 cd /tmp/
