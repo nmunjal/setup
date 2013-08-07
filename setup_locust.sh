@@ -33,11 +33,24 @@ elif [ $system_type -eq $debian_type ]; then
 fi
 let "steps++"
 
+
 pip="pip"
 type python-pip > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     pip="python-pip"
 fi
+# Bug https://github.com/locustio/locust/issues/52
+# Need to install latest gevent 1.0rc2
+sudo $pip install cython # dependency for gevent1.0 rc
+cd /tmp/
+rm 1.0* gevent* -rf
+wget https://github.com/surfly/gevent/archive/1.0rc2.tar.gz
+tar xvzf 1.0rc2.tar.gz
+cd gevent-1.0rc2
+sudo python setup.py install
+cd
+
+
 sudo $pip install locustio
 
 sudo updatedb
