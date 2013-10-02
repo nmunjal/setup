@@ -40,9 +40,9 @@ let "steps++"
 echo "$steps. Installing spawn-fcgi"
 if [ $system_type -eq $redhat_type ]; then
     sudo yum -y install http://epel.mirror.net.in/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    sudo yum -y install spawn-fcgi fcgi fcgi-devel gcc-c++
+    sudo yum -y install spawn-fcgi fcgi fcgi-devel gcc-c++ libmemcached-devel
 elif [ $system_type -eq $debian_type ]; then
-    sudo apt-get -y install libfcgi-dev spawn-fcgi g++
+    sudo apt-get -y install libfcgi-dev spawn-fcgi g++ libmemcached-dev
 fi
 let "steps++"
 
