@@ -59,9 +59,10 @@ let "steps++"
 echo "$steps. Installing g++"
 if [ $system_type -eq $redhat_type ]; then
     sudo yum -y install http://epel.mirror.net.in/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    sudo yum -y install gcc-c++ python-pip
+    sudo yum -y install gcc-c++ python-pip python-devel zlib-devel
+    sudo pip install pylibmc
 elif [ $system_type -eq $debian_type ]; then
-    sudo apt-get -y install g++ pip
+    sudo apt-get -y install g++ pip python-dev
 fi
 let "steps++"
 
