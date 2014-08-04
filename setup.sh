@@ -83,6 +83,7 @@ ln -sb dotfiles/.bashrc .
 ln -sb dotfiles/.bashrc_custom .
 ln -sb dotfiles/.vimrc .
 ln -sb dotfiles/.gitconfig .
+ln -sb dotfiles/.vim .
 let "steps++"
 
 
